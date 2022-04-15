@@ -10,9 +10,17 @@ type Query {
 type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    saveBook(authors: [String]!, description: String!, title: String!, bookId: ID, link: String): User
-    removeBook(bookId: ID); User
+    saveBook(book: SavedBookInput): User
+    removeBook(bookId: String); User
   }
+  input SavedBookInput {
+    authors: [String]
+    description: String
+    bookId: String
+    image: String
+    link: String
+    title: String
+}
 
 type User {
   _id: ID
@@ -23,12 +31,13 @@ type User {
 }
 
 type Book {
-    bookId: 
-    authors: [String]
-    description: String
-    title: String
-    image: String
-    link: String
+  _id: ID
+  bookId: String
+  authors: [String]
+  description: String
+  title: String
+  image: String
+  link: String
 }
 
 type Auth {
@@ -37,3 +46,4 @@ type Auth {
   }
 
 `
+module.exports = typeDefs;
